@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Environment variables
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Docker artifacts (optional but clean)
+.docker
+docker-compose.override.yml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Build outputs
+dist
+build
+
+# MongoDB local data (if ever used locally)
+data
+*.pid
+
+# IDE files
+.vscode
+.idea

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Docker App</title>
+</head>
+<body>
+  <h1>My Items</h1>
+
+  <input id="itemInput" placeholder="Enter item" />
+  <button onclick="addItem()">Add</button>
+
+  <ul id="list"></ul>
+
+  <script>
+    const API = "http://localhost:5000";
+
+    async function fetchItems() {
+      const res = await fetch(API + "/items");
+      const data = await res.json();
+
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      data.forEach(item => {
+        const li = document.createElement("li");
+        li.innerText = item.name;
+        list.appendChild(li);
+      });
+    }
+
+    async function addItem() {
+      const input = document.getElementById("itemInput");
+
+      await fetch(API + "/items", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: input.value })
+      });
+
+      input.value = "";
+      fetchItems();
+    }
+
+    fetchItems();
+  </script>
+</body>
+</html>
